@@ -1,0 +1,44 @@
+/*
+ * Main.java
+ *
+ * Created on 25 November, 2009, 4:51 AM
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
+
+package stock;
+import javax.swing.*;
+/**
+ *
+ * @author AKHIL
+ */
+public class Main {
+    
+    /** Creates a new instance of Main */
+    public Main() {
+    }
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       SwingUtilities.invokeLater(new Runnable(){
+       public void run(){
+       int c=Integer.valueOf(javax.swing.JOptionPane.showInputDialog(null,"inter 1 for row material&   2for product_detail   3 for daily_product_detail       4 for order detail")); 
+     if(c==1)
+       new Raw();
+       else if(c==2)
+           new Product();
+       else if(c==3)
+           new Daily_Product();
+       else
+           new Order_Detail();
+       }
+       }
+       
+       );
+       
+    }  
+    
+}

@@ -1,0 +1,352 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.1.30-community-log
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema comanage
+--
+
+CREATE DATABASE IF NOT EXISTS comanage;
+USE comanage;
+
+--
+-- Definition of table `cust_dealer_detail`
+--
+
+DROP TABLE IF EXISTS `cust_dealer_detail`;
+CREATE TABLE `cust_dealer_detail` (
+  `cust_id` varchar(10) NOT NULL,
+  `company_name` varchar(45) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `contact` bigint(10) DEFAULT NULL,
+  `category` varchar(10) NOT NULL,
+  PRIMARY KEY (`cust_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cust_dealer_detail`
+--
+
+/*!40000 ALTER TABLE `cust_dealer_detail` DISABLE KEYS */;
+INSERT INTO `cust_dealer_detail` (`cust_id`,`company_name`,`address`,`contact`,`category`) VALUES 
+ ('1c1','symentics','nawabganj',4294967295,'customer'),
+ ('1o1','','',0,''),
+ ('1p1','kj','lk',12,'klk'),
+ ('1p11','lkl','we',89,'ji');
+/*!40000 ALTER TABLE `cust_dealer_detail` ENABLE KEYS */;
+
+
+--
+-- Definition of table `daily_made_product`
+--
+
+DROP TABLE IF EXISTS `daily_made_product`;
+CREATE TABLE `daily_made_product` (
+  `product_id` varchar(10) NOT NULL,
+  `date` date DEFAULT '2009-10-10',
+  `quantity` int(10) unsigned NOT NULL,
+  `scrape` int(10) unsigned NOT NULL,
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `product_detail` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `daily_made_product`
+--
+
+/*!40000 ALTER TABLE `daily_made_product` DISABLE KEYS */;
+INSERT INTO `daily_made_product` (`product_id`,`date`,`quantity`,`scrape`) VALUES 
+ ('1s1','2009-12-12',50,20);
+/*!40000 ALTER TABLE `daily_made_product` ENABLE KEYS */;
+
+
+--
+-- Definition of table `emp_attandance`
+--
+
+DROP TABLE IF EXISTS `emp_attandance`;
+CREATE TABLE `emp_attandance` (
+  `emp_id` varchar(10) NOT NULL,
+  `year` int(4) unsigned NOT NULL,
+  `month` varchar(10) NOT NULL,
+  `overtime` int(3) unsigned NOT NULL,
+  `attand` int(3) unsigned NOT NULL,
+  `absent` int(3) unsigned NOT NULL,
+  KEY `emp_id` (`emp_id`),
+  CONSTRAINT `emp_id1` FOREIGN KEY (`emp_id`) REFERENCES `emp_detail` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `emp_attandance`
+--
+
+/*!40000 ALTER TABLE `emp_attandance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emp_attandance` ENABLE KEYS */;
+
+
+--
+-- Definition of table `emp_detail`
+--
+
+DROP TABLE IF EXISTS `emp_detail`;
+CREATE TABLE `emp_detail` (
+  `emp_id` varchar(10) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `emp_name` varchar(45) NOT NULL,
+  `sex` varchar(1) NOT NULL,
+  `age` int(3) unsigned NOT NULL,
+  `contact` int(15) unsigned NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `date_of_join` date NOT NULL DEFAULT '1990-01-01',
+  `grade` varchar(4) NOT NULL,
+  `category` varchar(10) NOT NULL,
+  PRIMARY KEY (`emp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `emp_detail`
+--
+
+/*!40000 ALTER TABLE `emp_detail` DISABLE KEYS */;
+INSERT INTO `emp_detail` (`emp_id`,`password`,`emp_name`,`sex`,`age`,`contact`,`address`,`date_of_join`,`grade`,`category`) VALUES 
+ ('ris','mittal','rishabh','m',20,4294967295,'jain nagar','1999-06-23','a','manager');
+/*!40000 ALTER TABLE `emp_detail` ENABLE KEYS */;
+
+
+--
+-- Definition of table `login_detail`
+--
+
+DROP TABLE IF EXISTS `login_detail`;
+CREATE TABLE `login_detail` (
+  `category` varchar(10) NOT NULL,
+  `login_name` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  PRIMARY KEY (`category`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `login_detail`
+--
+
+/*!40000 ALTER TABLE `login_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `login_detail` ENABLE KEYS */;
+
+
+--
+-- Definition of table `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `order_id` varchar(20) NOT NULL,
+  `company_name` varchar(20) NOT NULL,
+  `date` date DEFAULT NULL,
+  `status` char(5) NOT NULL,
+  `category` varchar(20) NOT NULL,
+  `total_cost` int(10) unsigned NOT NULL,
+  `paid_cost` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `order`
+--
+
+/*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` (`order_id`,`company_name`,`date`,`status`,`category`,`total_cost`,`paid_cost`) VALUES 
+ ('1','','2009-11-11','','',0,0),
+ ('1o1','','2009-11-11','','',0,0),
+ ('1p1','jj2','2009-11-11','nk','kk',12,12),
+ ('2o2','jl','2009-11-11','jl','jl',12,12);
+/*!40000 ALTER TABLE `order` ENABLE KEYS */;
+
+
+--
+-- Definition of table `order_detail`
+--
+
+DROP TABLE IF EXISTS `order_detail`;
+CREATE TABLE `order_detail` (
+  `order_id` varchar(20) NOT NULL,
+  `product_id` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `quantity` bigint(10) DEFAULT NULL,
+  KEY `order_id` (`order_id`),
+  CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `order_detail`
+--
+
+/*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
+INSERT INTO `order_detail` (`order_id`,`product_id`,`name`,`quantity`) VALUES 
+ ('1o1','1s1','',0),
+ ('1','1s1','',0);
+/*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
+
+
+--
+-- Definition of table `payment_detail`
+--
+
+DROP TABLE IF EXISTS `payment_detail`;
+CREATE TABLE `payment_detail` (
+  `payment_id` varchar(45) NOT NULL,
+  `order_id` varchar(45) NOT NULL,
+  `date` date NOT NULL,
+  `payment` bigint(20) NOT NULL,
+  PRIMARY KEY (`payment_id`),
+  KEY `order` (`order_id`),
+  CONSTRAINT `order` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment_detail`
+--
+
+/*!40000 ALTER TABLE `payment_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment_detail` ENABLE KEYS */;
+
+
+--
+-- Definition of table `product_detail`
+--
+
+DROP TABLE IF EXISTS `product_detail`;
+CREATE TABLE `product_detail` (
+  `product_id` varchar(20) NOT NULL,
+  `product_name` varchar(20) NOT NULL,
+  `cost` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_detail`
+--
+
+/*!40000 ALTER TABLE `product_detail` DISABLE KEYS */;
+INSERT INTO `product_detail` (`product_id`,`product_name`,`cost`) VALUES 
+ ('1s1','s.n.',100),
+ ('2s1','s.n2.',100),
+ ('3s1','s.n3.',100),
+ ('4s1','s.n4',100),
+ ('pid1','wqe',0);
+/*!40000 ALTER TABLE `product_detail` ENABLE KEYS */;
+
+
+--
+-- Definition of table `product_stock`
+--
+
+DROP TABLE IF EXISTS `product_stock`;
+CREATE TABLE `product_stock` (
+  `product_id` varchar(20) NOT NULL,
+  `quantity` int(10) unsigned NOT NULL,
+  `date_of_manufacturing` date DEFAULT NULL,
+  KEY `product_id2` (`product_id`),
+  CONSTRAINT `product_id2` FOREIGN KEY (`product_id`) REFERENCES `product_detail` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_stock`
+--
+
+/*!40000 ALTER TABLE `product_stock` DISABLE KEYS */;
+INSERT INTO `product_stock` (`product_id`,`quantity`,`date_of_manufacturing`) VALUES 
+ ('1s1',10,'2009-11-28');
+/*!40000 ALTER TABLE `product_stock` ENABLE KEYS */;
+
+
+--
+-- Definition of table `raw_stock`
+--
+
+DROP TABLE IF EXISTS `raw_stock`;
+CREATE TABLE `raw_stock` (
+  `product_id` varchar(20) NOT NULL,
+  `company_name` varchar(20) NOT NULL,
+  `quantity` int(10) unsigned NOT NULL,
+  `date_of_purchasing` date DEFAULT NULL,
+  KEY `product_id1` (`product_id`),
+  CONSTRAINT `product_id1` FOREIGN KEY (`product_id`) REFERENCES `product_detail` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `raw_stock`
+--
+
+/*!40000 ALTER TABLE `raw_stock` DISABLE KEYS */;
+INSERT INTO `raw_stock` (`product_id`,`company_name`,`quantity`,`date_of_purchasing`) VALUES 
+ ('4s1','s.n.sons',10,'2009-11-28'),
+ ('1s1','m',1223,'2009-11-11');
+/*!40000 ALTER TABLE `raw_stock` ENABLE KEYS */;
+
+
+--
+-- Definition of table `salary_detail`
+--
+
+DROP TABLE IF EXISTS `salary_detail`;
+CREATE TABLE `salary_detail` (
+  `emp_id` varchar(10) NOT NULL,
+  `year` int(4) unsigned zerofill NOT NULL,
+  `month` varchar(10) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `salary` int(10) unsigned zerofill NOT NULL,
+  KEY `emp_id` (`emp_id`),
+  CONSTRAINT `emp_id` FOREIGN KEY (`emp_id`) REFERENCES `emp_detail` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `salary_detail`
+--
+
+/*!40000 ALTER TABLE `salary_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `salary_detail` ENABLE KEYS */;
+
+
+--
+-- Definition of table `salary_standards`
+--
+
+DROP TABLE IF EXISTS `salary_standards`;
+CREATE TABLE `salary_standards` (
+  `category` varchar(10) NOT NULL,
+  `grade` varchar(4) NOT NULL,
+  `basic_salary` int(10) unsigned NOT NULL,
+  `overtime_rate` int(10) unsigned NOT NULL,
+  `absent_rate` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`category`,`grade`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `salary_standards`
+--
+
+/*!40000 ALTER TABLE `salary_standards` DISABLE KEYS */;
+/*!40000 ALTER TABLE `salary_standards` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
